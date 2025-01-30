@@ -3,6 +3,10 @@ include('includes/conn.php');
 ?>
 <?php include('includes/header.php'); ?>
 
+<head>
+    <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+</head>
+
 <body>
     <?php include('includes/navbar.php'); ?>
     <?php include('includes/sidebar.php'); ?>
@@ -14,31 +18,31 @@ include('includes/conn.php');
                     <span class="fas fa-plus"></span> Add User
                 </a>
             </div>
-        </div>
-        <div class="card">
-        <div class="card-body">
-            <div class=" table-responsive">   
-                <table id="example" class="display">
-                    <colgroup>
-                        <col width="5%">
-                        <col width="60%">
-                        <col width="35%">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th>Fullname</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql = "SELECT * FROM users";
-                        $result = mysqli_query($conn, $sql);
-                        if (mysqli_num_rows($result) > 0) {
-                            // Loop through and display each row in the table
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class=" table-responsive">
+                            <table id="example" class="display">
+                                <colgroup>
+                                    <col width="5%">
+                                    <col width="60%">
+                                    <col width="35%">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th>Fullname</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "SELECT * FROM users";
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        // Loop through and display each row in the table
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>
                                         <td>" . $row['id'] . "</td>
                                         <td>" . $row['last_name'] . ", " . $row['first_name'] . "</td>
                                         <td style='text-align: center; justify-content: center; align-items: center;'>
@@ -46,16 +50,19 @@ include('includes/conn.php');
                                             <a href='delete.php?id=" . $row['id'] . "' class='btn btn-danger shadow btn-xs sharp' ><i class='fas fa-trash'></i></a>
                                         </td>
                                       </tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='3'>No data found</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='3'>No data found</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+
     </div>
 
     </div>
@@ -71,8 +78,4 @@ include('includes/conn.php');
     </script>
     <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="js/plugins-init/datatables.init.js"></script>
-    <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src ="vendor/datatables/js/jquery.dataTables.min.js"></script>
-
-
 </body>
